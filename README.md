@@ -171,7 +171,7 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 - Expose a `/v1/completions` compatible endpoint
 - Document startup command
 
-**Hardware target: 2× L40S GPUs** (see provisioning notes below)
+**Hardware target: 2× or 4× L40S GPUs — your choice** (see provisioning notes below)
 
 ### Deliverables
 
@@ -234,14 +234,27 @@ nebius compute instance create \
 
 **Multi-GPU (Assignment 2)**
 
-The L40S platform supports up to 2 GPUs per instance. Confirm the exact preset name with your manager before provisioning — it follows the pattern `2gpu-16vcpu-64gb` but verify availability first.
+Choose 2 or 4 L40S GPUs — both are valid. More GPUs means you can explore more interesting parallelism configurations, but 2 is sufficient to complete all requirements. Confirm the preset name with your manager before provisioning.
 
 ```bash
+# 2-GPU
 nebius compute instance create \
   --name raml40s-learn-<yourname>-multi \
   --parent-id <project-id> \
   --resources-platform gpu-l40s-a \
   --resources-preset 2gpu-16vcpu-64gb \
+  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
+  --boot-disk-managed-disk-type network_ssd \
+  --boot-disk-managed-disk-size-gibibytes 200 \
+  --preemptible \
+  --ssh-key RP-windows-laptop
+
+# 4-GPU
+nebius compute instance create \
+  --name raml40s-learn-<yourname>-multi \
+  --parent-id <project-id> \
+  --resources-platform gpu-l40s-a \
+  --resources-preset 4gpu-32vcpu-128gb \
   --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
   --boot-disk-managed-disk-type network_ssd \
   --boot-disk-managed-disk-size-gibibytes 200 \
