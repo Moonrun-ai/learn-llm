@@ -99,7 +99,12 @@ A transformer language model that generates Shakespeare-style text. This is inte
 
 ### Sign-off: Presentation to the Team
 
-When your deliverables are ready, schedule a meeting with your colleagues. Walk through what you built — the architecture decisions, the training run, a live demo of the served model. Your colleagues will tell you whether the work is complete or needs more. **You do not move to Assignment 2 until the team signs off on Assignment 1.**
+When your deliverables are ready, schedule a meeting and invite:
+- raghuvir@moonrun.ai
+- ram@moonrun.ai
+- evgueni@moonrun.ai
+
+Walk through what you built — the architecture decisions, the training run, a live demo of the served model. Your colleagues will tell you whether the work is complete or needs more. **You do not move to Assignment 2 until the team signs off on Assignment 1.**
 
 What to cover in the presentation:
 - How the transformer works in your implementation (not a theory lecture — show your code)
@@ -188,7 +193,12 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 
 ### Sign-off: Presentation to the Team
 
-Same process as Assignment 1. Schedule a meeting, present to colleagues, and get explicit sign-off before the assignment is considered complete. **You do not submit your onboarding as done until the team signs off on Assignment 2.**
+Same process as Assignment 1. Schedule a meeting and invite:
+- raghuvir@moonrun.ai
+- ram@moonrun.ai
+- evgueni@moonrun.ai
+
+Present to the team and get explicit sign-off before the assignment is considered complete. **You do not submit your onboarding as done until the team signs off on Assignment 2.**
 
 What to cover in the presentation:
 - How you split the model across GPUs for each strategy (diagrams welcome)
