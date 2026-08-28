@@ -166,7 +166,7 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 - Expose a `/v1/completions` compatible endpoint
 - Document startup command
 
-**Hardware target: 2–4× L40S GPUs** (see provisioning notes below)
+**Hardware target: 2× L40S GPUs** (see provisioning notes below)
 
 ### Deliverables
 
@@ -209,33 +209,40 @@ What to cover in the presentation:
 Moonrun uses Nebius for GPU instances. You will be given credentials.
 
 **Single-GPU (Assignment 1)**
-```
+```bash
 nebius compute instance create \
   --name raml40s-learn-<yourname>-1 \
-  --preset gpu-l40s-a \
-  --gpu-count 1 \
-  --cores 8 \
-  --memory 32 \
+  --parent-id <project-id> \
+  --resources-platform gpu-l40s-a \
+  --resources-preset 1gpu-8vcpu-32gb \
+  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
+  --boot-disk-managed-disk-type network_ssd \
+  --boot-disk-managed-disk-size-gibibytes 200 \
   --preemptible \
-  --zone eu-north1
+  --ssh-key RP-windows-laptop
 ```
 
 **Multi-GPU (Assignment 2)**
-```
+
+The L40S platform supports up to 2 GPUs per instance. Confirm the exact preset name with your manager before provisioning — it follows the pattern `2gpu-16vcpu-64gb` but verify availability first.
+
+```bash
 nebius compute instance create \
   --name raml40s-learn-<yourname>-multi \
-  --preset gpu-l40s-a \
-  --gpu-count 4 \
-  --cores 32 \
-  --memory 128 \
+  --parent-id <project-id> \
+  --resources-platform gpu-l40s-a \
+  --resources-preset 2gpu-16vcpu-64gb \
+  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
+  --boot-disk-managed-disk-type network_ssd \
+  --boot-disk-managed-disk-size-gibibytes 200 \
   --preemptible \
-  --zone eu-north1
+  --ssh-key RP-windows-laptop
 ```
 
 **Important:**
 - Stop your instance when you are not actively using it. Preemptible instances are cheaper but can be reclaimed — checkpoint frequently.
 - Never leave a GPU instance running overnight unattended.
-- Ask your manager before changing instance type or adding more than 4 GPUs.
+- Ask your manager before provisioning the multi-GPU instance — confirm the preset exists and get approval on cost.
 
 ---
 
