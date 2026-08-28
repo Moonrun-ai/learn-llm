@@ -2,6 +2,8 @@
 
 Welcome to Moonrun. This is your first technical assignment. It is designed to take **1–2 weeks**, with a hard ceiling of **4 weeks**. By the end, you will have trained and served two language models from scratch — one on a single GPU, one distributed across multiple GPUs.
 
+The goal is not to make you an LLM expert. The goal is to give you a solid enough foundation that you can participate — everything at Moonrun is built around this technology, and we need you to be able to follow conversations, ask the right questions, and contribute without needing to be caught up every time. The faster you build this foundation, the faster you can do real work.
+
 This is not a course. It is a sequence of things to build. Read what you need, then build.
 
 ---
