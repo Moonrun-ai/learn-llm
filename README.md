@@ -97,18 +97,20 @@ A transformer language model that generates Shakespeare-style text. This is inte
 - [ ] `requirements.txt` or `pyproject.toml`
 - [ ] `README_assignment1.md` — documents: how to train, how to serve, your final train/val loss, one sample generation
 
-### What we will check
+### Sign-off: Presentation to the Team
 
-- Does it train without errors?
-- Does the loss curve make sense?
-- Does the served output look like Shakespeare?
-- Can we follow your code without asking you questions?
+When your deliverables are ready, schedule a meeting with your colleagues. Walk through what you built — the architecture decisions, the training run, a live demo of the served model. Your colleagues will tell you whether the work is complete or needs more. **You do not move to Assignment 2 until the team signs off on Assignment 1.**
+
+What to cover in the presentation:
+- How the transformer works in your implementation (not a theory lecture — show your code)
+- Your loss curve and what it tells you
+- A live generation from the served endpoint
+- What was harder than you expected and why
 
 ### Notes
 
 - Target ~6 layers, ~6 heads, ~384 embedding dim. You can go larger if you want, but do not chase scale here.
 - If training is stable but slow, check your learning rate and batch size before assuming hardware issues.
-- Do not spend more than 2 hours debugging a single problem before asking for help.
 
 ---
 
@@ -183,6 +185,16 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 - Is your benchmark honest? (we will re-run it)
 - Can you explain why one strategy used more memory than the other?
 - Does the vLLM server respond to a curl request?
+
+### Sign-off: Presentation to the Team
+
+Same process as Assignment 1. Schedule a meeting, present to colleagues, and get explicit sign-off before the assignment is considered complete. **You do not submit your onboarding as done until the team signs off on Assignment 2.**
+
+What to cover in the presentation:
+- How you split the model across GPUs for each strategy (diagrams welcome)
+- Your benchmark results and what drove the differences
+- A live request to the vLLM-served model
+- What you would do differently at 10× the scale
 
 ### Common pitfalls
 
