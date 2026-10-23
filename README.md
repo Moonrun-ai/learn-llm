@@ -215,17 +215,6 @@ Practical notes:
 
 ---
 
-## How to Submit
-
-Push your work to a repo under the `Moonrun-ai` GitHub organization: `Moonrun-ai/llm-onboarding-<yourname>`.
-
-When ready for review, open a PR and send us the link. Include in the PR description:
-- What surprised you
-- What you would do differently
-- One thing you still do not fully understand (honesty is valued here)
-
----
-
 ## If You Get Stuck
 
 In order:
