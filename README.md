@@ -112,7 +112,7 @@ Bring graphs. We want to see that you understand the model you built and that yo
 - **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide.
 - **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading.
 - **Time to train.** Wall clock for the full run, and what you would change to halve it.
-- **What you did to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
+- **If you did anything to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
 - **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
 - **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
 - **What was harder than you expected**, and why.
