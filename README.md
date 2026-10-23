@@ -8,6 +8,14 @@ This is not a course. It is a sequence of things to build. Read what you need, t
 
 ---
 
+## Selection criteria
+
+This is the key interview. The assignment itself is fairly straightforward, and you can ask Claude to build most of it quickly. That is fine, and we expect it. What we are selecting on is the depth of your understanding of what you built, and we read that relative to how much exposure you have already had to LLMs.
+
+So spend the time. Go through the assignments properly, build the graphs and the visuals, whatever it takes until you are confident you can explain what was happening and why.
+
+---
+
 ## Timeline
 
 | Week | Focus |
