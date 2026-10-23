@@ -31,35 +31,34 @@ Key episodes:
 - *Building makemore* (parts 1–5) — MLP → BatchNorm → backprop from scratch
 - *Let's build GPT* — the full transformer, trained on Shakespeare
 
-### Read next
+### Other references
 
-**The Illustrated Transformer — Jay Alammar**
-https://jalammar.github.io/illustrated-transformer/
+None of these are prerequisites. Pull from whichever one answers the question in front of you.
 
-Best visual explanation of attention that exists. Read it slowly, not skimming.
-
-**Attention Is All You Need (2017)**
-https://arxiv.org/abs/1706.03762
-
-Read the architecture section and the multi-head attention equations. You do not need to read the experiments section deeply on the first pass.
-
-**The Illustrated GPT-2 — Jay Alammar**
-https://jalammar.github.io/illustrated-gpt2/
-
-Bridges the transformer paper to autoregressive language modeling.
-
-### Reference material (use as needed, not front-to-back)
-
-- **Hugging Face NLP Course** — https://huggingface.co/learn/nlp-course/
-  Start at Chapter 1. Use Chapters 2–4 when you hit tokenization or fine-tuning questions.
-- **Sebastian Raschka — Build a Large Language Model From Scratch**
+- **The Illustrated Transformer** (Jay Alammar)
+  https://jalammar.github.io/illustrated-transformer/
+  The clearest visual explanation of attention there is.
+- **Attention Is All You Need** (2017)
+  https://arxiv.org/abs/1706.03762
+  The architecture section and the multi-head attention equations are the parts that matter here.
+- **The Illustrated GPT-2** (Jay Alammar)
+  https://jalammar.github.io/illustrated-gpt2/
+  Bridges the transformer paper to autoregressive language modeling.
+- **Build a Large Language Model From Scratch** (Sebastian Raschka)
   https://github.com/rasbt/LLMs-from-scratch
-  Code-first companion to his book. Good when you want to see a clean implementation alongside your own.
-- **Lilian Weng's blog** — https://lilianweng.github.io/
-  Authoritative deep-dives on specific topics (scaling laws, RLHF, etc.). Use when you need to go deeper on one concept.
+  A clean implementation to read alongside your own.
+- **Hugging Face NLP Course**
+  https://huggingface.co/learn/nlp-course/
+  Chapters 2 to 4 for tokenization and fine-tuning questions.
+- **Lilian Weng's blog**
+  https://lilianweng.github.io/
+  Deep dives on one topic at a time, for when you need to go further than the rest of this list.
 - **fast.ai Practical Deep Learning**
   https://course.fast.ai/
-  Optional but useful if you want more intuition on training dynamics before starting the assignments.
+  Intuition on training dynamics.
+- **PyTorch performance and profiling docs**
+  https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html
+  Relevant to both assignments, since measuring the run is most of the work.
 
 ---
 
