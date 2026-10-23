@@ -109,10 +109,16 @@ When your deliverables are ready, schedule a meeting and invite:
 Walk through what you built — the architecture decisions, the training run, a live demo of the served model. Your colleagues will tell you whether the work is complete or needs more. **You do not move to Assignment 2 until the team signs off on Assignment 1.**
 
 What to cover in the presentation:
-- How the transformer works in your implementation (not a theory lecture — show your code)
-- Your loss curve and what it tells you
-- A live generation from the served endpoint
-- What was harder than you expected and why
+
+Bring graphs. We are looking for two things: that you understand the model you built, and that you understand how it runs on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude.
+
+- **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide.
+- **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading.
+- **Time to train.** Wall clock for the full run, and what you would change to halve it.
+- **What you did to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
+- **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
+- **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
+- **What was harder than you expected**, and why.
 
 ### Notes
 
@@ -203,10 +209,17 @@ Same process as Assignment 1. Schedule a meeting and invite:
 Present to the team and get explicit sign-off before the assignment is considered complete. **You do not submit your onboarding as done until the team signs off on Assignment 2.**
 
 What to cover in the presentation:
-- How you split the model across GPUs for each strategy (diagrams welcome)
-- Your benchmark results and what drove the differences
-- A live request to the vLLM-served model
-- What you would do differently at 10× the scale
+
+Same bar as Assignment 1, now across GPUs. What we are really testing is whether you can explain why one configuration is faster than another and back it with numbers.
+
+- **Loss curves for both strategies**, on the same axes. They should land in roughly the same place. If they do not, explain what differs.
+- **Step time per strategy**, split into compute and communication. How much of each step is GPUs waiting on each other?
+- **Throughput and MFU.** Tokens per second and time to train for each strategy. How far off the hardware peak are you, and what is the gap made of?
+- **Scaling.** Step time and throughput at 1, 2 and 4 GPUs. You will not get a 4× speedup, so quantify what you lost and name the cause: bubble time, all reduce volume, uneven stages, memory pressure.
+- **Memory per device** for each strategy, and why the two differ.
+- **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
+- **How you would speed this up next.** The one change you would make first, and the number you expect it to move.
+- **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale.
 
 ### Common pitfalls
 
