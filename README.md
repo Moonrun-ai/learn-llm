@@ -123,7 +123,6 @@ Bring graphs. We are looking for two things: that you understand the model you b
 ### Notes
 
 - Target ~6 layers, ~6 heads, ~384 embedding dim. You can go larger if you want, but do not chase scale here.
-- If training is stable but slow, check your learning rate and batch size before assuming hardware issues.
 
 ---
 
@@ -137,39 +136,31 @@ Moonrun operates at datacenter scale. Understanding how models are split across 
 
 ### Background reading (required before starting)
 
-**Data Parallelism**
-Each GPU holds a copy of the model. Each sees a different batch. Gradients are averaged across GPUs.
-- PyTorch DDP guide: https://pytorch.org/tutorials/intermediate/ddp_tutorial.html
+**FSDP (Fully Sharded Data Parallel)**
+- PyTorch FSDP tutorial: https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html
 
 **Tensor Parallelism**
-Each layer's weight matrices are split across GPUs. GPUs cooperate within a single forward pass via all-reduce/all-gather.
 - Megatron-LM paper: https://arxiv.org/abs/1909.08053
 - Practical intro: https://huggingface.co/docs/transformers/perf_train_gpu_many#tensor-parallelism
 
 **Pipeline Parallelism**
-Different layers live on different GPUs. Forward pass flows through them in sequence (with microbatching to reduce bubble time).
 - GPipe paper: https://arxiv.org/abs/1811.06965
 - PipeDream: https://arxiv.org/abs/1806.03377
-
-**FSDP (Fully Sharded Data Parallel)**
-Parameters, gradients, and optimizer states are sharded across GPUs. Reduces per-GPU memory significantly at the cost of communication.
-- PyTorch FSDP tutorial: https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html
 
 **Useful survey**
 - https://huggingface.co/docs/transformers/perf_train_gpu_many — covers all strategies with diagrams
 
 ### What you are building
 
-A language model (your choice of dataset — OpenWebText, books corpus, or continue with Shakespeare at larger scale) trained across **at least 2 GPUs** using **at least 2 parallelism strategies**.
+A language model (your choice of dataset — OpenWebText, books corpus, or continue with Shakespeare at larger scale) trained across **at least 2 GPUs** using **two of FSDP, tensor parallelism and pipeline parallelism**.
 
 ### Requirements
 
 **Training**
-- Implement or configure two of the following:
-  - **DDP** — data parallelism with `torch.nn.parallel.DistributedDataParallel`
-  - **FSDP** — sharded data parallel with `torch.distributed.fsdp`
-  - **Tensor Parallelism** — use [Megatron-LM](https://github.com/NVIDIA/Megatron-LM) or implement column/row-parallel linear layers manually
-  - **Pipeline Parallelism** — use `torch.distributed.pipeline.sync` or implement stage splitting manually
+- Pick two of the following three and implement both:
+  - **FSDP**
+  - **Tensor Parallelism**
+  - **Pipeline Parallelism**
 - Write a short comparison: wall-clock time per step, GPU memory usage, and MFU (model FLOP utilization) for each strategy
 - Checkpoint the final model
 
@@ -194,10 +185,10 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 
 ### What we will check
 
-- Do both strategies actually train? (loss curves for both)
-- Is your benchmark honest? (we will re-run it)
-- Can you explain why one strategy used more memory than the other?
-- Does the vLLM server respond to a curl request?
+- Which of your two strategies performed better, and why. This is the question we care about most.
+- How it could be improved.
+- Whether the numbers hold up. We will re-run your benchmark.
+- Whether both strategies trained, and whether the vLLM server answers a request.
 
 ### Sign-off: Presentation to the Team
 
@@ -210,28 +201,22 @@ Present to the team and get explicit sign-off before the assignment is considere
 
 What to cover in the presentation:
 
-Same bar as Assignment 1, now across GPUs. What we are really testing is whether you can explain why one configuration is faster than another and back it with numbers.
+Same bar as Assignment 1, now across GPUs. The goal is a richer presentation than the first one: more to show, and judgement about what is worth showing. Focus on the key points rather than walking us through everything you did.
 
-- **Loss curves for both strategies**, on the same axes. They should land in roughly the same place. If they do not, explain what differs.
-- **Step time per strategy**, split into compute and communication. How much of each step is GPUs waiting on each other?
-- **Throughput and MFU.** Tokens per second and time to train for each strategy. How far off the hardware peak are you, and what is the gap made of?
-- **Scaling.** Step time and throughput at 1, 2 and 4 GPUs. You will not get a 4× speedup, so quantify what you lost and name the cause: bubble time, all reduce volume, uneven stages, memory pressure.
+- **Loss curves for both strategies**, on the same axes.
+- **Step time for each strategy**, and where that time goes.
+- **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak.
+- **Scaling.** Step time and throughput at 1, 2 and 4 GPUs. Quantify the speedup you did not get, and account for it.
 - **Memory per device** for each strategy, and why the two differ.
 - **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
-- **How you would speed this up next.** The one change you would make first, and the number you expect it to move.
+- **Which strategy won, and why.** Then how you would improve it: the change you would make first, and the number you expect it to move.
 - **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale.
-
-### Common pitfalls
-
-- NCCL errors on startup usually mean `MASTER_ADDR` / `MASTER_PORT` are not set, or you launched with the wrong number of processes
-- Pipeline parallelism bubble time is real — measure it, do not assume 1/N speedup
-- vLLM expects HuggingFace-compatible model weights — convert your checkpoint if needed
 
 ---
 
 ## Compute
 
-Use whichever cloud provider you like. L40S instances are cheap and widely available, and that is the card both assignments are sized for. Pick whoever gives you the best price and the fastest path to a running machine.
+Use whichever cloud provider you like. L40S instances are cheap and widely available, and that is the card both assignments are sized for. nebius.com has them. Pick whoever gives you the best price and the fastest path to a running machine.
 
 **We reimburse your compute costs.** Keep the receipts handy in case we ask. Both assignments together should land somewhere between 10 and 50 dollars on spot pricing; well above that usually means something is running when it should not be.
 
