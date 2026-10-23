@@ -83,10 +83,10 @@ Once it trains, the interesting part is measuring it: how long a step takes, whe
 ### Requirements
 
 **Training**
-- Implement the transformer architecture yourself or adapt [nanoGPT](https://github.com/karpathy/nanoGPT). Do not copy-paste blindly — understand every line.
+- Implement the transformer architecture yourself or adapt [nanoGPT](https://github.com/karpathy/nanoGPT). However you write it, you must be able to explain every line.
 - Dataset: [Shakespeare text](https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt) (~1MB, ~40k lines)
 - Tokenization: character-level (no BPE required, though you may add it)
-- Logging: track train loss and val loss. Plot them.
+- Logging: track train loss and val loss, step time, and GPU utilization and memory across the run. Plot them.
 - Checkpoint: save a checkpoint after training
 - Hardware target: **1× L40S GPU** (see [Compute](#compute) below)
 
@@ -129,14 +129,13 @@ The main focus is the benchmarking. Training the model is the means. What we are
 
 Moonrun operates at datacenter scale. Most of the work is finding out why a run is slower than the hardware allows, and then fixing it. This assignment is a small version of that.
 
-### Background reading (required before starting)
+### Background reading
 
 **FSDP (Fully Sharded Data Parallel)**
 - PyTorch FSDP tutorial: https://pytorch.org/tutorials/intermediate/FSDP_tutorial.html
 
 **Tensor Parallelism**
 - Megatron-LM paper: https://arxiv.org/abs/1909.08053
-- Practical intro: https://huggingface.co/docs/transformers/perf_train_gpu_many#tensor-parallelism
 
 **Pipeline Parallelism**
 - GPipe paper: https://arxiv.org/abs/1811.06965
@@ -156,7 +155,7 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
   - **FSDP**
   - **Tensor Parallelism**
   - **Pipeline Parallelism**
-- Write a short comparison: wall-clock time per step, GPU memory usage, and MFU (model FLOP utilization) for each strategy
+- Record what you need to compare the two: wall-clock time per step and where that time goes, GPU memory per device, throughput, and MFU (model FLOP utilization). Capture the same numbers at each GPU count you run.
 - Checkpoint the final model
 
 **Serving**
@@ -174,9 +173,13 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 - [ ] `serve_distributed.py` (or vLLM launch script)
 - [ ] `benchmark.md` — side-by-side comparison of your two parallelism strategies:
   - GPU memory per device
-  - Steps/sec or tokens/sec
+  - Step time, and steps/sec or tokens/sec
+  - MFU, with the peak figure and the FLOP count you used to arrive at it
+  - The same numbers at each GPU count you ran
+  - Which card you used and how the GPUs were connected to each other
   - Notes on what you had to change when switching strategies
-- [ ] Updated `README_assignment2.md` — how to launch training, how to launch serving
+- [ ] `requirements.txt` or `pyproject.toml`
+- [ ] `README_assignment2.md` — how to launch training, how to launch serving
 
 ### What we will check
 
@@ -192,11 +195,13 @@ Same bar as Assignment 1, now across GPUs. The benchmark is the centre of this o
 - **Loss curves for both strategies**, on the same axes.
 - **Step time for each strategy**, and where that time goes.
 - **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak.
-- **Scaling.** Step time and throughput at 1, 2 and 4 GPUs. Quantify the speedup you did not get, and account for it.
+- **Scaling.** Step time and throughput at each GPU count you ran. Quantify the speedup you did not get, and account for it.
 - **Memory per device** for each strategy, and why the two differ.
 - **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
 - **Which strategy won, and why.** Then how you would improve it: the change you would make first, and the number you expect it to move.
 - **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale.
+
+---
 
 ## Presentation
 
@@ -219,16 +224,4 @@ Sizing:
 Practical notes:
 - Spot and preemptible instances are much cheaper and fine for this work. Checkpoint frequently so a reclaim costs you minutes, not days.
 - Stop the instance when you are not actively using it. Never leave a GPU running overnight unattended.
-- If L40S is unavailable wherever you look, anything with comparable memory works. Note which card you used in your README, since your benchmark numbers depend on it.
-
----
-
-## If You Get Stuck
-
-In order:
-1. Re-read the relevant background material
-2. Add print statements and inspect shapes, dtypes, and loss values
-3. Search the linked repos' GitHub Issues
-4. Ask a colleague — but come with a minimal reproduction, not "it does not work"
-
-The goal is not to finish fast. The goal is to understand deeply enough that you can debug problems you have never seen before. That is the job.
+- If L40S is unavailable wherever you look, anything with comparable memory works. Note which card you used in `benchmark.md`, since your numbers depend on it.
