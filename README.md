@@ -220,7 +220,7 @@ What to cover in the presentation:
 
 Use whichever cloud provider you like. L40S instances are cheap and widely available, and that is the card both assignments are sized for. Pick whoever gives you the best price and the fastest path to a running machine.
 
-**We reimburse your compute costs.** Keep the receipts and file them as an expense. Both assignments together should land somewhere between 10 and 50 dollars on spot pricing. If you are tracking well above that, stop and talk to your manager, because it usually means something is running when it should not be.
+**We reimburse your compute costs.** Keep the receipts handy in case we ask. Both assignments together should land somewhere between 10 and 50 dollars on spot pricing; well above that usually means something is running when it should not be.
 
 Sizing:
 - Assignment 1: 1x L40S
