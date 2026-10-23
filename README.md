@@ -12,7 +12,6 @@ This is not a course. It is a sequence of things to build. Read what you need, t
 
 | Week | Focus |
 |------|-------|
-| 1 | Foundations — read, watch, absorb the basics |
 | 1–2 | Assignment 1 — single-GPU Shakespeare LLM |
 | 2–4 | Assignment 2 — multi-GPU LLM with parallelism strategies |
 
@@ -20,14 +19,12 @@ This is not a course. It is a sequence of things to build. Read what you need, t
 
 ## Phase 1: Foundations
 
-Do not skip this. The assignments will not make sense without it.
-
 ### Watch first
 
 **Andrej Karpathy — Neural Networks: Zero to Hero**
 https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
 
-Start from the beginning. By the end of this series you will have built a GPT from scratch, character by character. The Shakespeare dataset appears explicitly. Watch at 1.25× if you need to move faster. Do not skip the math.
+These videos are long. You can go through all of them, but it will take you some time, so use them as reference and pull out what you need. By the end of the series you will have built a GPT from scratch, character by character, on the Shakespeare dataset.
 
 Key episodes:
 - *The spelled-out intro to language modeling* — builds bigram model, introduces loss
