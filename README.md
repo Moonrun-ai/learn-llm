@@ -97,31 +97,6 @@ Once it trains, the interesting part is measuring it: how long a step takes, whe
 - [ ] `requirements.txt` or `pyproject.toml`
 - [ ] `README_assignment1.md` — documents: how to train, how to serve, your final train/val loss, one sample generation
 
-### Sign-off: Presentation to the Team
-
-When your deliverables are ready, schedule a meeting and invite:
-- raghuvir@moonrun.ai
-- ram@moonrun.ai
-- evgueni@moonrun.ai
-
-Walk through what you built — the architecture decisions, the training run, a live demo of the served model. Your colleagues will tell you whether the work is complete or needs more. **You do not move to Assignment 2 until the team signs off on Assignment 1.**
-
-What to cover in the presentation:
-
-Bring graphs. We are looking for two things: that you understand the model you built, and that you understand how it runs on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude.
-
-- **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide.
-- **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading.
-- **Time to train.** Wall clock for the full run, and what you would change to halve it.
-- **What you did to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
-- **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
-- **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
-- **What was harder than you expected**, and why.
-
-### Notes
-
-- Target ~6 layers, ~6 heads, ~384 embedding dim. You can go larger if you want, but do not chase scale here.
-
 ---
 
 ## Assignment 2: Multi-GPU LLM — Parallelism Strategies
@@ -190,18 +165,25 @@ We are not assessing the quality of the model. Loss values and sample text are n
 - Which of your two strategies performed better, and why. This is the question we care about most.
 - How it could be improved.
 
-### Sign-off: Presentation to the Team
+## Presentation
 
-Same process as Assignment 1. Schedule a meeting and invite:
-- raghuvir@moonrun.ai
-- ram@moonrun.ai
-- evgueni@moonrun.ai
+One session covers both assignments. Send a note to ram@moonrun.ai when you are ready and we will get it scheduled: a two hour interview, with 45 minutes on each assignment.
 
-Present to the team and get explicit sign-off before the assignment is considered complete. **You do not submit your onboarding as done until the team signs off on Assignment 2.**
+Bring graphs. We are looking for two things: that you understand the models you built, and that you understand how they ran on the GPUs. Plots are how you show us both, so label the axes and say what each one led you to conclude.
 
-What to cover in the presentation:
+The goal is a richer presentation, not a longer one. Focus on the key points rather than walking us through everything you did.
 
-Same bar as Assignment 1, now across GPUs. The goal is a richer presentation than the first one: more to show, and judgement about what is worth showing. Focus on the key points rather than walking us through everything you did.
+### Assignment 1
+
+- **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide.
+- **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading.
+- **Time to train.** Wall clock for the full run, and what you would change to halve it.
+- **What you did to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
+- **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
+- **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
+- **What was harder than you expected**, and why.
+
+### Assignment 2
 
 - **Loss curves for both strategies**, on the same axes.
 - **Step time for each strategy**, and where that time goes.
