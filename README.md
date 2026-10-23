@@ -19,12 +19,12 @@ This is not a course. It is a sequence of things to build. Read what you need, t
 
 ## Phase 1: Foundations
 
-### Watch first
+### Watch first if you are not familiar with LLMs
 
 **Andrej Karpathy — Neural Networks: Zero to Hero**
 https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
 
-These videos are long. You can go through all of them, but it will take you some time, so use them as reference and pull out what you need. By the end of the series you will have built a GPT from scratch, character by character, on the Shakespeare dataset.
+Caution: these videos are long and detailed, and digesting all of them could take you a week on its own. Use them as reference and pull out what you need. By the end of the series you will have built a GPT from scratch, character by character, on the Shakespeare dataset.
 
 Key episodes:
 - *The spelled-out intro to language modeling* — builds bigram model, introduces loss
