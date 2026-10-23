@@ -82,7 +82,7 @@ A transformer language model that generates Shakespeare-style text. This is inte
 - Tokenization: character-level (no BPE required, though you may add it)
 - Logging: track train loss and val loss. Plot them.
 - Checkpoint: save a checkpoint after training
-- Hardware target: **1× L40S GPU** (see provisioning notes below)
+- Hardware target: **1× L40S GPU** (see [Compute](#compute) below)
 
 **Serving**
 - Load your checkpoint and expose a `/generate` endpoint
@@ -173,7 +173,7 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 - Expose a `/v1/completions` compatible endpoint
 - Document startup command
 
-**Hardware target: 2× or 4× L40S GPUs — your choice** (see provisioning notes below)
+**Hardware target: 2× or 4× L40S GPUs, your choice** (see [Compute](#compute) below)
 
 ### Deliverables
 
@@ -216,58 +216,20 @@ What to cover in the presentation:
 
 ---
 
-## Compute: Nebius GPU Instances
+## Compute
 
-Moonrun uses Nebius for GPU instances. You will be given credentials.
+Use whichever cloud provider you like. L40S instances are cheap and widely available, and that is the card both assignments are sized for. Pick whoever gives you the best price and the fastest path to a running machine.
 
-**Single-GPU (Assignment 1)**
-```bash
-nebius compute instance create \
-  --name raml40s-learn-<yourname>-1 \
-  --parent-id <project-id> \
-  --resources-platform gpu-l40s-a \
-  --resources-preset 1gpu-8vcpu-32gb \
-  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
-  --boot-disk-managed-disk-type network_ssd \
-  --boot-disk-managed-disk-size-gibibytes 200 \
-  --preemptible \
-  --ssh-key RP-windows-laptop
-```
+**We reimburse your compute costs.** Keep the receipts and file them as an expense. Both assignments together should land somewhere between 10 and 50 dollars on spot pricing. If you are tracking well above that, stop and talk to your manager, because it usually means something is running when it should not be.
 
-**Multi-GPU (Assignment 2)**
+Sizing:
+- Assignment 1: 1x L40S
+- Assignment 2: 2x or 4x L40S, your choice. More GPUs means more interesting parallelism configurations, but 2 is enough to meet every requirement.
 
-Choose 2 or 4 L40S GPUs — both are valid. More GPUs means you can explore more interesting parallelism configurations, but 2 is sufficient to complete all requirements. Confirm the preset name with your manager before provisioning.
-
-```bash
-# 2-GPU
-nebius compute instance create \
-  --name raml40s-learn-<yourname>-multi \
-  --parent-id <project-id> \
-  --resources-platform gpu-l40s-a \
-  --resources-preset 2gpu-16vcpu-64gb \
-  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
-  --boot-disk-managed-disk-type network_ssd \
-  --boot-disk-managed-disk-size-gibibytes 200 \
-  --preemptible \
-  --ssh-key RP-windows-laptop
-
-# 4-GPU
-nebius compute instance create \
-  --name raml40s-learn-<yourname>-multi \
-  --parent-id <project-id> \
-  --resources-platform gpu-l40s-a \
-  --resources-preset 4gpu-32vcpu-128gb \
-  --network-interfaces '[{"name":"eth0","subnet_id":"<subnet>","public_ip_address":{}}]' \
-  --boot-disk-managed-disk-type network_ssd \
-  --boot-disk-managed-disk-size-gibibytes 200 \
-  --preemptible \
-  --ssh-key RP-windows-laptop
-```
-
-**Important:**
-- Stop your instance when you are not actively using it. Preemptible instances are cheaper but can be reclaimed — checkpoint frequently.
-- Never leave a GPU instance running overnight unattended.
-- Ask your manager before provisioning the multi-GPU instance — confirm the preset exists and get approval on cost.
+Practical notes:
+- Spot and preemptible instances are much cheaper and fine for this work. Checkpoint frequently so a reclaim costs you minutes, not days.
+- Stop the instance when you are not actively using it. Never leave a GPU running overnight unattended.
+- If L40S is unavailable wherever you look, anything with comparable memory works. Note which card you used in your README, since your benchmark numbers depend on it.
 
 ---
 
