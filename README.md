@@ -182,10 +182,10 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 
 ### What we will check
 
+We are not assessing the quality of the model. Loss values and sample text are not the point here. What we want to see is that you understand how the thing performs on the hardware.
+
 - Which of your two strategies performed better, and why. This is the question we care about most.
 - How it could be improved.
-- Whether the numbers hold up. We will re-run your benchmark.
-- Whether both strategies trained, and whether the vLLM server answers a request.
 
 ### Sign-off: Presentation to the Team
 
