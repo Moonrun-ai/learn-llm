@@ -71,6 +71,8 @@ Bridges the transformer paper to autoregressive language modeling.
 
 A transformer language model that generates Shakespeare-style text. This is intentionally small — the point is to own every part of the pipeline end-to-end, not to achieve state-of-the-art perplexity.
 
+Once it trains, the interesting part is measuring it: how long a step takes, where that time goes, what the GPU was doing while it ran, and what you can change to make it faster.
+
 ### Requirements
 
 **Training**
@@ -125,11 +127,13 @@ Bring graphs. We are looking for two things: that you understand the model you b
 
 ## Assignment 2: Multi-GPU LLM — Parallelism Strategies
 
-**Goal:** Train a larger language model distributed across multiple GPUs, using at least two distinct parallelism strategies. Then serve it with vLLM.
+**Goal:** Train a larger language model distributed across multiple GPUs using two parallelism strategies, benchmark both, and serve the result with vLLM.
+
+The main focus is the benchmarking. Training the model is the means. What we are after is how it ran on the GPUs, where the bottlenecks were, and what you would do to speed it up.
 
 ### Why this matters at Moonrun
 
-Moonrun operates at datacenter scale. Understanding how models are split across GPUs — and what the tradeoffs are — is foundational to the work here. This assignment is where you learn that.
+Moonrun operates at datacenter scale. Most of the work is finding out why a run is slower than the hardware allows, and then fixing it. This assignment is a small version of that.
 
 ### Background reading (required before starting)
 
