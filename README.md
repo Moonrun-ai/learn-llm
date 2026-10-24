@@ -192,16 +192,9 @@ A language model trained across **at least 2 GPUs** with two different paralleli
 - [ ] `requirements.txt` or `pyproject.toml`
 - [ ] `README_assignment2.md` — how to launch training, how to launch serving
 
-### What we will check
-
-We are not assessing the quality of the model. Loss values and sample text are not the point here. What we want to see is that you understand how the thing performs on the hardware.
-
-- Which of your two strategies performed better, and why. This is the question we care about most.
-- How it could be improved.
-
 ### What to present
 
-Same bar as Assignment 1, now across GPUs and with a bill that multiplies by the GPU count. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it.
+Same bar as Assignment 1, now across GPUs and with a bill that multiplies by the GPU count. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it. We are not assessing the quality of the model, so loss values and sample text are not the point. How it performed on the hardware is.
 
 Filter the same way. Measure all of it, then build the presentation around the few findings that decide which strategy you would actually run and what you would change to make it faster or cheaper. Everything else is backup.
 
@@ -214,7 +207,7 @@ Measure at least this much, then filter:
 - **Scaling.** Step time and throughput at each GPU count you ran. Twice the GPUs is twice the bill, so quantify the speedup you did not get and account for it.
 - **Memory per device** for each strategy, and why the two differ. Memory you did not need is a smaller instance you could have rented.
 - **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
-- **Which strategy won, and why.** Be specific about won at what: step time, memory, tokens per dollar. Then how you would improve it: the change you would make first, and the number you expect it to move.
+- **Which strategy won, and why.** This is the question we care about most. Be specific about won at what: step time, memory, tokens per dollar. Then how you would improve it: the change you would make first, and the number you expect it to move.
 - **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale and at 10× the cost pressure.
 - **Your own experiments.** The configurations and limits you probed beyond this list, why each one seemed worth the time, and what it cost against what it bought. The dead ends count.
 
