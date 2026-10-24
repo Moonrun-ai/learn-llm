@@ -12,7 +12,7 @@ It is not a course. Read what you need, build it, then go find out how it behave
 
 ## Selection criteria
 
-This is the key interview. The assignment itself is fairly straightforward, and you can ask Claude to build most of it quickly. That is fine, and we expect it. What we are selecting on is the depth of your understanding of what you built, and we read that relative to how much exposure you have already had to LLMs.
+This is the key interview. Using Claude to write the code is fine and we expect it. What we are selecting on is the depth of your understanding of what you built, and we read that relative to how much exposure you have already had to LLMs.
 
 So spend the time. Go through the assignments properly, build the graphs and the visuals, whatever it takes until you are confident you can explain what was happening and why.
 
@@ -24,20 +24,20 @@ What we are always chasing at Moonrun is the highest performance at the lowest c
 
 ## Timeline
 
-A week. The code is a few hours of that. The rest is yours for measuring, experimenting and getting to where you can explain what you built. Do Assignment 1 first, since Assignment 2 builds on it.
+A week, and Assignment 1 before Assignment 2 since the second builds on the first.
 
 If you need longer, tell us why and we will work with it.
 
 ---
 
-## Phase 1: Foundations
+## Foundations
 
 ### Watch first if you are not familiar with LLMs
 
 **Andrej Karpathy — Neural Networks: Zero to Hero**
 https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
 
-Caution: these videos are long and detailed, and digesting all of them could take you a week on its own. Use them as reference and pull out what you need. By the end of the series you will have built a GPT from scratch, character by character, on the Shakespeare dataset.
+Caution: these videos are long and detailed, and going through all of them takes real time. Use them as reference and pull out what you need. By the end of the series you will have built a GPT from scratch, character by character, on the Shakespeare dataset.
 
 Key episodes:
 - *The spelled-out intro to language modeling* — builds bigram model, introduces loss
@@ -83,7 +83,7 @@ None of these are prerequisites. Pull from whichever one answers the question in
 
 A transformer language model that generates Shakespeare-style text. This is intentionally small — the point is to own every part of the pipeline end-to-end, not to achieve state-of-the-art perplexity.
 
-Once it trains, the interesting part is measuring it: how long a step takes, where that time goes, what the GPU was doing while it ran, and what you can change to make it faster.
+Once it trains, the interesting part is measuring it and then making it faster.
 
 ### Requirements
 
@@ -152,7 +152,7 @@ Moonrun operates at datacenter scale. Most of the work is finding out why a run 
 
 ### What you are building
 
-A language model (your choice of dataset — OpenWebText, books corpus, or continue with Shakespeare at larger scale) trained across **at least 2 GPUs** using **two of FSDP, tensor parallelism and pipeline parallelism**.
+A language model trained across **at least 2 GPUs** with two different parallelism strategies, so you can compare them. Dataset is your choice: OpenWebText, a books corpus, or Shakespeare again at larger scale.
 
 ### Requirements
 
@@ -167,6 +167,7 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
 **Serving**
 - Serve using [vLLM](https://github.com/vllm-project/vllm)
 - Use tensor parallelism in vLLM (`--tensor-parallel-size N`)
+- Getting your checkpoint into a form vLLM will load is part of this
 - Expose a `/v1/completions` compatible endpoint
 - Document startup command
 
@@ -181,7 +182,6 @@ A language model (your choice of dataset — OpenWebText, books corpus, or conti
   - GPU memory per device
   - Step time, and steps/sec or tokens/sec
   - MFU, with the peak figure and the FLOP count you used to arrive at it
-  - The same numbers at each GPU count you ran
   - Which card you used and how the GPUs were connected to each other
   - Notes on what you had to change when switching strategies
 - [ ] `requirements.txt` or `pyproject.toml`
@@ -198,7 +198,7 @@ We are not assessing the quality of the model. Loss values and sample text are n
 
 Same bar as Assignment 1, now across GPUs. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it.
 
-- **Loss curves for both strategies**, on the same axes.
+- **Loss curves for both strategies**, on the same axes, far enough to show the two runs are comparable. We are not reading them for model quality.
 - **Step time for each strategy**, and where that time goes.
 - **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak.
 - **Scaling.** Step time and throughput at each GPU count you ran. Quantify the speedup you did not get, and account for it.
@@ -212,7 +212,7 @@ Same bar as Assignment 1, now across GPUs. The benchmark is the centre of this o
 
 ## Presentation
 
-One session covers both assignments. Send a note to ram@moonrun.ai when you are ready and we will get it scheduled: a two hour interview, with 45 minutes on each assignment.
+One session covers both assignments. Send a note to ram@moonrun.ai when you are ready and we will get it scheduled: a two hour interview, roughly 45 minutes on each assignment and the rest for questions.
 
 What to present is listed under each assignment. The goal is a richer presentation, not a longer one, so focus on the key points rather than walking us through everything you did.
 
