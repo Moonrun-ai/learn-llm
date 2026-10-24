@@ -18,7 +18,7 @@ So spend the time. Go through the assignments properly, build the graphs and the
 
 Be creative with it. What to present under each assignment is a floor, not the list of experiments worth running. Run your own assessments and analysis, and tell us why you ran each one.
 
-What we are always chasing at Moonrun is the highest performance at the lowest cost, so that is the lens to think in. Experiments that went nowhere are as welcome as the ones that worked, and you should bring both. We are not scoring results. We want to see how you think.
+**What we are always chasing at Moonrun is the highest performance at the lowest cost, so that is the lens to think in.** Experiments that went nowhere are as welcome as the ones that worked, and you should bring both. We are not scoring results. We want to see how you think.
 
 ---
 
