@@ -1,10 +1,12 @@
 # Moonrun LLM Interview Assignment
 
-This is the technical assignment for the role. It is designed to take **1–2 weeks**, with a hard ceiling of **4 weeks**. By the end you will have trained and served two language models from scratch, one on a single GPU and one distributed across multiple GPUs.
+This is the technical assignment for the role. By the end you will have trained and served two language models from scratch, one on a single GPU and one distributed across multiple GPUs.
+
+Writing the code is a few hours of work. Hand the requirements to Claude and most of it comes back quickly. The time goes into what happens after that: running it, measuring it, changing one thing at a time and working out why the numbers moved. Budget your effort there, not on the code. We expect you to be ready to present about a week after you start.
 
 We are not looking for an LLM expert. Everything at Moonrun is built around this technology, so what we need to know is whether you can follow the conversation, ask the right questions and contribute without being caught up every time. This assignment is how we find that out.
 
-It is not a course. It is a sequence of things to build. Read what you need, then build.
+It is not a course. Read what you need, build it, then go find out how it behaves.
 
 ---
 
@@ -14,14 +16,15 @@ This is the key interview. The assignment itself is fairly straightforward, and 
 
 So spend the time. Go through the assignments properly, build the graphs and the visuals, whatever it takes until you are confident you can explain what was happening and why.
 
+Be creative with it. What to present under each assignment is a floor, not the list of experiments worth running. Find your own ways to interrogate the model and the hardware, and bring us what you found. Going after something we did not ask about counts for a lot.
+
 ---
 
 ## Timeline
 
-| Week | Focus |
-|------|-------|
-| 1–2 | Assignment 1 — single-GPU Shakespeare LLM |
-| 2–4 | Assignment 2 — multi-GPU LLM with parallelism strategies |
+A week. The code is a few hours of that. The rest is yours for measuring, experimenting and getting to where you can explain what you built. Do Assignment 1 first, since Assignment 2 builds on it.
+
+If you need longer, tell us why and we will work with it.
 
 ---
 
@@ -115,6 +118,7 @@ Bring graphs. We want to see that you understand the model you built and that yo
 - **If you did anything to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
 - **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
 - **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
+- **Anything you went looking for yourself.** Experiments we did not ask for, numbers that surprised you, things you broke on purpose to see what happened.
 - **What was harder than you expected**, and why.
 
 ---
@@ -200,6 +204,7 @@ Same bar as Assignment 1, now across GPUs. The benchmark is the centre of this o
 - **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
 - **Which strategy won, and why.** Then how you would improve it: the change you would make first, and the number you expect it to move.
 - **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale.
+- **Anything you went looking for yourself.** The configurations, failure cases and limits you probed beyond the list above.
 
 ---
 
