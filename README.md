@@ -112,7 +112,11 @@ Once it trains, the interesting part is measuring it and then making it faster.
 
 ### What to present
 
-Bring graphs. We want to see that you understand the model you built and that you understand how it ran on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude. Point every number at the same question: how much performance did this run get, and what did it cost to get it.
+Bring graphs. We want to see that you understand the model you built and that you understand how it ran on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude.
+
+Do not walk us through the whole list. Measure all of it, then decide for yourself which few things actually mattered for making this run faster or cheaper, and present those with the data behind them. Three findings you can argue properly beat every number you collected. Keep the rest to hand in case we ask.
+
+Measure at least this much, then filter:
 
 - **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide. Tell us where in the run you stopped buying anything with the time you were spending.
 - **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading. This is the number everything else is paid out of.
@@ -199,6 +203,10 @@ We are not assessing the quality of the model. Loss values and sample text are n
 
 Same bar as Assignment 1, now across GPUs and with a bill that multiplies by the GPU count. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it.
 
+Filter the same way. Measure all of it, then build the presentation around the few findings that decide which strategy you would actually run and what you would change to make it faster or cheaper. Everything else is backup.
+
+Measure at least this much, then filter:
+
 - **Loss curves for both strategies**, on the same axes, far enough to show the two runs are comparable. We are not reading them for model quality.
 - **Step time for each strategy**, and where that time goes.
 - **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak. MFU is the share of the hardware you are paying for that you actually used, so treat the gap as the finding.
@@ -216,7 +224,7 @@ Same bar as Assignment 1, now across GPUs and with a bill that multiplies by the
 
 One session covers both assignments. Send a note to ram@moonrun.ai when you are ready and we will get it scheduled: a two hour interview, roughly 45 minutes on each assignment and the rest for questions.
 
-What to present is listed under each assignment. The goal is a richer presentation, not a longer one, so focus on the key points rather than walking us through everything you did.
+What to present is listed under each assignment. Those lists are what to measure. What to say is your call, and choosing well is part of what we are reading.
 
 ---
 
