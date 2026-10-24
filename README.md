@@ -112,13 +112,14 @@ Once it trains, the interesting part is measuring it and then making it faster.
 
 ### What to present
 
-Bring graphs. We want to see that you understand the model you built and that you understand how it ran on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude.
+Bring graphs. We want to see that you understand the model you built and that you understand how it ran on the GPU. Plots are how you show us both, so label the axes and say what each one led you to conclude. Point every number at the same question: how much performance did this run get, and what did it cost to get it.
 
-- **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide.
-- **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading.
-- **Time to train.** Wall clock for the full run, and what you would change to halve it.
-- **If you did anything to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work.
-- **What the GPU was actually doing.** Utilization and memory across the run. An idle GPU is the interesting case, so tell us why it was idle.
+- **Loss curves.** Train and validation on the same axes. Where does validation stop following train, and what did you do about it? Explain any kink, spike or plateau rather than leaving it on the slide. Tell us where in the run you stopped buying anything with the time you were spending.
+- **Step time.** Milliseconds per training step, and where they go: forward, backward, optimizer, data loading. This is the number everything else is paid out of.
+- **Time to train.** Wall clock for the full run and the dollars that bought, and what you would change to halve either one.
+- **If you did anything to speed it up.** Batch size, mixed precision, warmup, keeping the GPU fed, whatever you tried. Give before and after numbers, including for the things that did not work, and say what each one did to the cost of the run.
+- **What the GPU was actually doing.** Utilization and memory across the run. You are paying for the whole card the whole time, so an idle GPU is the interesting case and we want to know why it was idle.
+- **The cheapest version of this run.** Having measured it, what is the least money you could reach the same loss for, and what is in the way of doing that today.
 - **Your code, then a live generation.** Walk the attention path as you wrote it, not the theory, then generate from the served endpoint.
 - **Your own experiments.** What you assessed beyond this list, why you thought it was worth measuring, and what came back. Bring the ones that failed too.
 - **What was harder than you expected**, and why.
@@ -196,16 +197,17 @@ We are not assessing the quality of the model. Loss values and sample text are n
 
 ### What to present
 
-Same bar as Assignment 1, now across GPUs. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it.
+Same bar as Assignment 1, now across GPUs and with a bill that multiplies by the GPU count. The benchmark is the centre of this one, so lead with the comparison and let the graphs carry it.
 
 - **Loss curves for both strategies**, on the same axes, far enough to show the two runs are comparable. We are not reading them for model quality.
 - **Step time for each strategy**, and where that time goes.
-- **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak.
-- **Scaling.** Step time and throughput at each GPU count you ran. Quantify the speedup you did not get, and account for it.
-- **Memory per device** for each strategy, and why the two differ.
+- **Throughput and MFU.** Tokens per second and time to train for each strategy, against the hardware peak. MFU is the share of the hardware you are paying for that you actually used, so treat the gap as the finding.
+- **Cost of the same work under each strategy.** Dollars to train the same model each way, and the throughput you got per dollar.
+- **Scaling.** Step time and throughput at each GPU count you ran. Twice the GPUs is twice the bill, so quantify the speedup you did not get and account for it.
+- **Memory per device** for each strategy, and why the two differ. Memory you did not need is a smaller instance you could have rented.
 - **How you split the model.** A diagram per strategy showing what lives where and what crosses the wire.
-- **Which strategy won, and why.** Then how you would improve it: the change you would make first, and the number you expect it to move.
-- **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale.
+- **Which strategy won, and why.** Be specific about won at what: step time, memory, tokens per dollar. Then how you would improve it: the change you would make first, and the number you expect it to move.
+- **A live request to the vLLM endpoint**, and what you would do differently at 10× the scale and at 10× the cost pressure.
 - **Your own experiments.** The configurations and limits you probed beyond this list, why each one seemed worth the time, and what it cost against what it bought. The dead ends count.
 
 ---
